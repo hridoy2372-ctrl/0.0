@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#050a12">
+<meta name="description" content="THE LAST SIGNAL — a cinematic point-and-click horror survival mystery. Explore, solve clues, and decide what to send into the dark.">
+<meta property="og:type" content="website"><meta property="og:title" content="THE LAST SIGNAL — Horror Mystery"><meta property="og:description" content="Some signals should never be found."><meta property="og:image" content="icons/cover.svg">
+<link rel="icon" href="icons/icon.svg" type="image/svg+xml"><link rel="manifest" href="manifest.webmanifest"><link rel="stylesheet" href="style.css">
+<title>THE LAST SIGNAL — Horror Survival</title>
+</head>
+<body>
+<div class="app">
+  <header class="topbar">
+    <div class="brand"><span class="brand-mark">◉</span><div><b>THE LAST SIGNAL</b><small>BLACKPINE FIELD OPERATIONS</small></div></div>
+    <div class="top-signal"><i class="live-dot"></i><span id="signalState">SIGNAL LOST</span><span class="top-sep">/</span><span id="missionClock">00:00</span></div>
+    <div class="top-actions"><button class="quiet-btn" id="soundBtn" aria-label="Toggle sound">♫ SOUND: OFF</button><button class="quiet-btn" id="pauseBtn">Ⅱ PAUSE</button></div>
+  </header>
+
+  <main>
+    <section class="title-screen" id="titleScreen">
+      <div class="hero-art">
+        <div class="hero-vignette"></div><div class="hero-copy"><div class="eyebrow"><span></span> A CINEMATIC HORROR MYSTERY <span></span></div><h1>THE LAST<br><em>SIGNAL</em></h1><p class="hero-tag">SOME SIGNALS SHOULD NEVER BE FOUND...</p><p class="hero-desc">A missing research team. A cabin that should be empty. A radio tower repeating your name.</p><div class="hero-buttons"><button class="btn-primary" id="newGameBtn">▶ NEW GAME</button><button class="btn-secondary" id="continueBtn" hidden>↻ CONTINUE</button></div></div>
+        <div class="hero-stamp"><span>FIELD FILE</span><b>09</b><small>BLACKPINE<br>FOREST</small></div>
+      </div>
+      <div class="title-lower">
+        <div class="story-card"><div class="card-kicker">THE STORY SO FAR <span>CHAPTER 01</span></div><p>You are <b>Alex Mercer</b>, an investigative journalist searching for a missing research team. Their last transmission was a voice repeating the same coordinates—then a second voice answered from a place that should not exist.</p><p>With a broken radio, an abandoned cabin and a tower pulsing through the storm, you have one night to uncover the truth before the signal finds you.</p><div class="story-tags"><span>⌕ EXPLORE & INVESTIGATE</span><span>⌁ SURVIVAL PRESSURE</span><span>⚿ MULTIPLE ENDINGS</span></div></div>
+        <aside class="briefing"><div class="card-kicker">MISSION BRIEFING <span>OPERATION 07</span></div><div class="brief-row"><span>PLATFORM</span><b>WEB / MOBILE / DESKTOP</b></div><div class="brief-row"><span>GAMEPLAY</span><b>POINT & CLICK + PUZZLES</b></div><div class="brief-row"><span>PROGRESS</span><b id="saveStatus">NO SAVED OPERATION</b></div><div class="brief-row"><span>PROTOCOL</span><div class="difficulty-options"><button class="diff active" data-difficulty="standard">STANDARD</button><button class="diff" data-difficulty="hardcore">HARDCORE</button></div></div><p class="brief-note">Fictional horror adventure. Progress saves on this device. No account or backend required.</p></aside>
+      </div>
+    </section>
+
+    <section class="game-screen" id="gameScreen" hidden>
+      <div class="mission-strip"><div><span class="micro-label">CURRENT OBJECTIVE</span><b id="objectiveTitle">Search the forest marker.</b><small id="objectiveText">Find a way into the cabin.</small></div><div class="mission-progress"><div class="progress-copy"><span>FIELD PROGRESS</span><b id="progressText">01 / 07 LOCATIONS</b></div><div class="progress-track"><i id="progressBar"></i></div></div><div class="danger-chip" id="dangerChip"><i></i> LOW SIGNAL</div></div>
+      <div class="game-grid">
+        <section class="play-column">
+          <div class="scene-shell" id="sceneShell">
+            <img id="sceneImage" class="scene-image" src="scenes/forest.svg" alt="Blackpine Forest scene">
+            <div class="scene-darken"></div><div class="scene-grain"></div>
+            <div class="scene-heading"><div><span id="chapterLabel">LOCATION 01 / 07</span><h2 id="sceneTitle">BLACKPINE FOREST</h2></div><span class="scene-time" id="sceneTime">23:41 // FIELD FEED</span></div>
+            <div class="scene-caption" id="sceneCaption">The trees swallow the road behind you. A red light blinks on the signal marker.</div>
+            <div class="scene-hotspots" id="sceneHotspots" aria-label="Scene objects"></div>
+            <div class="scene-bottom"><span><i class="tiny-pulse"></i> FIELD OPERATION LIVE</span><span id="sceneHint">SELECT AN ACTION TO INVESTIGATE</span></div>
+          </div>
+          <div class="actions-panel"><div class="panel-title"><div><span class="micro-label">INTERACT / INVESTIGATE</span><h3>Available actions</h3></div><span class="keyboard-hint">TAP AN ACTION · KEYS 1–9</span></div><div class="action-grid" id="actionGrid"></div><div class="action-footer"><span class="key-tip"><kbd>J</kbd> JOURNAL</span><span class="key-tip"><kbd>M</kbd> MAP</span><span class="key-tip"><kbd>I</kbd> INVENTORY</span><span class="key-tip"><kbd>ESC</kbd> PAUSE</span></div></div>
+        </section>
+        <aside class="sidebar">
+          <section class="side-card status-card"><div class="side-title"><h3>FIELD STATUS</h3><span class="status-pill" id="modePill">STANDARD</span></div><div class="stat-line"><span>CONDITION</span><b id="healthValue">100%</b></div><div class="meter"><i id="healthMeter" class="health-meter"></i></div><div class="stat-line"><span>FEAR / SIGNAL EXPOSURE</span><b id="fearValue">08%</b></div><div class="meter"><i id="fearMeter" class="fear-meter"></i></div><div class="stat-line"><span>FLASHLIGHT BATTERY</span><b id="batteryValue">72%</b></div><div class="meter"><i id="batteryMeter" class="battery-meter"></i></div><div class="save-line">SAVE STATUS: <b id="autosaveLabel">SAVED LOCALLY</b></div></section>
+          <section class="side-card inventory-card"><div class="side-title"><h3>POCKET INVENTORY</h3><span id="itemCount">02 ITEMS</span></div><div class="inventory-grid" id="inventoryGrid"></div><button class="wide-quiet" id="inventoryBtn">OPEN INVENTORY ↗</button></section>
+          <section class="side-card notes-card"><div class="side-title"><h3>FIELD NOTES</h3><button class="mini-link" id="journalBtn">OPEN ↗</button></div><div class="note-checklist" id="noteChecklist"></div><div class="side-card-actions"><button class="side-action" id="mapBtn">⌖ TACTICAL MAP</button><button class="side-action" id="saveBtn">▣ SAVE NOW</button></div></section>
+        </aside>
+      </div>
+      <div class="mobile-dock"><button id="mobileJournal">▤<span>JOURNAL</span></button><button id="mobileInventory">▦<span>ITEMS</span></button><button id="mobileMap">⌖<span>MAP</span></button><button id="mobilePause">Ⅱ<span>PAUSE</span></button></div>
+    </section>
+  </main>
+  <footer class="footer"><span>THE LAST SIGNAL // BUILD 2.0.0</span><span>EXPLORE. SURVIVE. TRANSMIT.</span><span>MADE FOR DESKTOP + MOBILE</span></footer>
+</div>
+
+<div class="modal-backdrop" id="modalBackdrop" hidden><section class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><div class="modal-top"><span id="modalKicker">FIELD FILE / 09</span><button id="modalClose" class="modal-close" aria-label="Close dialog">×</button></div><h2 id="modalTitle">Recovered note</h2><div class="modal-content" id="modalContent"></div><div class="modal-actions" id="modalActions"></div></section></div>
+<div class="toast" id="toast" aria-live="polite"></div>
+<script src="game.js"></script>
+</body></html>
